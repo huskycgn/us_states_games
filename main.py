@@ -33,6 +33,8 @@ while score < len(statelist):
     answer_state = screen.textinput(title=f'Guess the State Score: {score}', prompt="What's another state's name?")
     answer_state = answer_state.title()
 
+    if answer_state == 'Exit':
+        break
     if answer_state in state_dict:
         xwrite = state_dict[answer_state][0]
         ywrite = state_dict[answer_state][1]
@@ -41,4 +43,10 @@ while score < len(statelist):
         score += 1
         correct_states.append(answer_state)
 
-screen.mainloop()
+states_to_learn = []
+for s in state_dict:
+    states_to_learn.append(s)
+
+
+states_to_learn = pandas.DataFrame(states_to_learn)
+states_to_learn.to_csv('states_to_learn.csv')
